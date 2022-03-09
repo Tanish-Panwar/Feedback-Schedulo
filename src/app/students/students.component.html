@@ -1,0 +1,237 @@
+
+<!-- A non useful navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+<!-- FOR ADDING STUDENTS FEEDBACK -->
+<div class="container my-4">
+  <div class="card border-primary mb-3">
+      <div class="card-header">
+          Event Feedback Form
+          <p class="card-text"><span><div id="emailHelp" class="form-text small">We'll never share your name, age or any kind of personal details with anyone else.<br>Thank you for attending the event we are thankfull, that you had attended the event.<br><br>We are pleased to hear about the event from you. So that we can increase the quality of the upcoming events.</div></span></p>
+      </div>
+      <div class="card-body" id="main">
+          <p class="card-text"><span><div id="emailHelp" class="form-text">😶 - Worst<br>😍 - Excellent</div></span></p>
+          <hr>
+
+          <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="studentService.selectedStudent._id">
+            <div class="row">
+              <div class="inp fields">
+      
+                <div class="my-4">
+                  <div class="mb-5">
+                    <label for="exampleInputName1" class="form-label">Name of Student</label>
+                    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="name" #name="ngModel"  [(ngModel)]="studentService.selectedStudent.name" placeholder="Name" required>
+                  </div>
+                  <div class="mb-5">
+                    <label for="exampleInputAge1" class="form-label">Age of Student</label>
+                    <input type="text" class="form-control" id="exampleInputAge1" aria-describedby="agehelp" name="age" #age="ngModel"  [(ngModel)]="studentService.selectedStudent.age" placeholder="Age" required>
+                  </div>
+                  <div class="mb-5">
+                    <label for="exampleInputClass1" class="form-label">Class of Student</label>
+                    <input type="text" class="form-control" id="exampleInputClass1" aria-describedby="classhelp" name="class" #class="ngModel"  [(ngModel)]="studentService.selectedStudent.class" placeholder="Class" required>
+                  </div>
+                </div>
+
+
+                <label for="customRange2" class="form-label">Rate the educator</label>
+                <div class="d-flex">
+                    <input type="range" class="form-range" min="1" max="5" id="customRange2" step="1" (change)="getSliderValue($event)" (oninput)="getSliderValue($event)" name="range" #range="ngModel" [(ngModel)]="studentService.selectedStudent.range">
+                    <div class="boxAfterRange"><h6 class="box-text" id="box-text"></h6></div>
+                </div>
+                <div class="my-5">
+                    <label for="customRange2" class="form-label">Lorem, ipsum.</label>
+                    <div class="input-group">
+                        <input class="form-control" aria-label="With textarea" placeholder="Tell us about the knowledge you gained (optional)"/>
+                      </div>
+                </div>
+      
+                <div class="my-5">
+                    <label for="customRange2" class="form-label">Tell us how you feel while meeting with others</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="lorem" #lorem="ngModel"  [(ngModel)]="studentService.selectedStudent.lorem" placeholder="Share your experience" required>
+                      </div>
+                </div>
+      
+      
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary mx-2 my-2" (click)="resetForm(studentForm)">Reset</button>
+            <button type="submit" class="btn btn-primary mx-2 my-2" [disabled]="!studentForm.valid">Submit</button>
+          </form>
+
+
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Showing students feedback -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Student's Feedback</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <!-- <th>Name</th>
+                <th>Age</th>
+                <th>Class</th> -->
+                <th>About this Course or event, from other students</th>
+                <th>Educator Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of studentService.students">
+                <!-- <td>{{student.name}}</td>
+                <td>{{student.age}}</td>
+                <td>{{student.class}}</td> -->
+                <td>{{student.lorem}}</td>
+                <td>{{student.range}}</td>
+                <!-- <td>
+                  <button class="btn btn-primary" (click)="onEdit(student)">Edit</button>
+                  <button class="btn btn-danger mx-2" (click)="onDelete(student._id)">Delete</button>
+
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ADDING STUDENTS Feedback -->
+<!-- <div>
+  <div class="container">
+    <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="studentService.selectedStudent._id">
+      <div class="row">
+        <div class="inp fields">
+
+          <div class="my-4" style="width: 18rem;">
+            <div class="mb-3">
+              <label for="exampleInputName1" class="form-label">Name of Student</label>
+              <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="name" #name="ngModel"  [(ngModel)]="studentService.selectedStudent.name" placeholder="Name" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputAge1" class="form-label">Age of Student</label>
+              <input type="text" class="form-control" id="exampleInputAge1" aria-describedby="agehelp" name="age" #age="ngModel"  [(ngModel)]="studentService.selectedStudent.age" placeholder="Age" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputClass1" class="form-label">Class of Student</label>
+              <input type="text" class="form-control" id="exampleInputClass1" aria-describedby="classhelp" name="class" #class="ngModel"  [(ngModel)]="studentService.selectedStudent.class" placeholder="Class" required>
+            </div>
+            <button type="button" class="btn btn-primary mx-2" (click)="resetForm(studentForm)">Reset</button>
+            <button type="submit" class="btn btn-primary mx-2" [disabled]="!studentForm.valid">Submit</button>
+          </div>
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->
