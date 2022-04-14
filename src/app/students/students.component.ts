@@ -10,52 +10,57 @@ import { StudentService } from '../shared/student.service';
   providers: [StudentService]
 })
 export class StudentsComponent implements OnInit {
+  educatorName: "Pablo";
+  eventName: "AdvanceDSA"
 
-  constructor(public studentService: StudentService) { }
+  constructor(public studentService: StudentService) {}
 
   ngOnInit(): void {
     this.resetForm();
     this.getStudents();
   }
-
+  
   arr = ['😶', '😐', '🙂', '😀', '😍'];
   getSliderValue(event: any){
     var text = document.querySelector('#box-text');
     text.innerHTML = this.arr[event.target.value-1];
   }
 
+  getSliderValue1(event: any){
+    var text = document.querySelector('#box-text1');
+    text.innerHTML = this.arr[event.target.value-1];
+  }
 
+  getSliderValue2(event: any){
+    var text = document.querySelector('#box-text2');
+    text.innerHTML = this.arr[event.target.value-1];
+  }
+
+  getSliderValue3(event: any){
+    var text = document.querySelector('#box-text3');
+    text.innerHTML = this.arr[event.target.value-1];
+  }
 
 
   resetForm(form?: NgForm){
     if(form)
       form.reset();
     this.studentService.selectedStudent = {
-      _id: '',
-      name: '',
-      age: null,
-      class: '',
-      lorem: '',
-      range: ''
+      educatorname: '',
+      eventname: '',
+      eventque: [ {eventrange: '', knowledge: '', exp: '', futureimv: '', futurethings: '', organized: '', recommendev: ''}],
+      educatorque: [{educatorrange: '', knowledgeofed: '', teaching: '', futureimvofed: '', organizeded: '', futuretopics: '', recommended: ''}]
     }
   }
 
 
   onSubmit(form: NgForm){
-    if(form.value._id == ''){
-      this.studentService.postStudent(form.value).subscribe((res) => {
-        this.resetForm(form);
-        this.getStudents();
-        alert('Feedback added successfully');
-      });
-    }
-    else{
-      this.studentService.putStudent(form.value).subscribe((res) => {
-        this.resetForm(form);
-        this.getStudents();
-        alert('Feedback updated successfully');
-      });
-    }
+    this.studentService.postStudent(form.value).subscribe((res) => {
+      this.resetForm(form);
+      this.getStudents();
+      alert('Feedback added successfully');
+    });
+    
   }
 
   getStudents(){
@@ -64,18 +69,6 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  onEdit(student: Student){
-    this.studentService.selectedStudent = student;
-  }
-
-  onDelete(_id: string){
-    if(confirm('Are you sure to delete this record?') == true){
-      this.studentService.deleteStudent(_id).subscribe((res) => {
-        this.getStudents();
-        alert('Student deleted successfully');
-      });
-    }
-  }  
 
 
 }

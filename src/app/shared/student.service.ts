@@ -12,7 +12,7 @@ import { Student } from './student.model';
 export class StudentService {
   selectedStudent: Student;
   students: Student[];
-  readonly baseURL = 'http://localhost:3000/students';
+  readonly baseURL = 'http://localhost:3000/sample';
   
   constructor(private http: HttpClient) { }
 
@@ -22,14 +22,6 @@ export class StudentService {
 
   getStudents(){
     return this.http.get(this.baseURL);
-  }
-
-  putStudent(student: Student){
-    return this.http.put(this.baseURL + `/${student._id}`, student);
-  }
-
-  deleteStudent(_id: string){
-    return this.http.delete(this.baseURL + `/${_id}`);
   }
   
 }

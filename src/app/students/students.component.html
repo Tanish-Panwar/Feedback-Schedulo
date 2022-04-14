@@ -14,25 +14,8 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <a class="btn btn-outline-success" type="submit">Show Feedbacks</a>
     </div>
   </div>
 </nav>
@@ -46,69 +29,283 @@
 
 
 
-<!-- FOR ADDING STUDENTS FEEDBACK -->
-<div class="container my-4">
-  <div class="card border-primary mb-3">
-      <div class="card-header">
-          Event Feedback Form
-          <p class="card-text"><span><div id="emailHelp" class="form-text small">We'll never share your name, age or any kind of personal details with anyone else.<br>Thank you for attending the event we are thankfull, that you had attended the event.<br><br>We are pleased to hear about the event from you. So that we can increase the quality of the upcoming events.</div></span></p>
-      </div>
-      <div class="card-body" id="main">
-          <p class="card-text"><span><div id="emailHelp" class="form-text">😶 - Worst<br>😍 - Excellent</div></span></p>
-          <hr>
-
-          <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
-            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="studentService.selectedStudent._id">
-            <div class="row">
-              <div class="inp fields">
-      
-                <div class="my-4">
-                  <div class="mb-5">
-                    <label for="exampleInputName1" class="form-label">Name of Student</label>
-                    <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="name" #name="ngModel"  [(ngModel)]="studentService.selectedStudent.name" placeholder="Name" required>
-                  </div>
-                  <div class="mb-5">
-                    <label for="exampleInputAge1" class="form-label">Age of Student</label>
-                    <input type="text" class="form-control" id="exampleInputAge1" aria-describedby="agehelp" name="age" #age="ngModel"  [(ngModel)]="studentService.selectedStudent.age" placeholder="Age" required>
-                  </div>
-                  <div class="mb-5">
-                    <label for="exampleInputClass1" class="form-label">Class of Student</label>
-                    <input type="text" class="form-control" id="exampleInputClass1" aria-describedby="classhelp" name="class" #class="ngModel"  [(ngModel)]="studentService.selectedStudent.class" placeholder="Class" required>
-                  </div>
-                </div>
 
 
-                <label for="customRange2" class="form-label">Rate the educator</label>
-                <div class="d-flex">
-                    <input type="range" class="form-range" min="1" max="5" id="customRange2" step="1" (change)="getSliderValue($event)" (oninput)="getSliderValue($event)" name="range" #range="ngModel" [(ngModel)]="studentService.selectedStudent.range">
-                    <div class="boxAfterRange"><h6 class="box-text" id="box-text"></h6></div>
-                </div>
-                <div class="my-5">
-                    <label for="customRange2" class="form-label">Lorem, ipsum.</label>
+
+
+<div class="container" style="width: 60%;">
+
+<div class="my-5">
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel" data-bs-interval="false">
+  <div class="carousel-inner">
+
+<form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+<!-- ACTIVE EDUCATOR --------------------------------------------------------------------------------------------- -->
+    <div class="carousel-item active">
+      <img class="d-block w-100" hidden>
+      <div class="card border-primary mb-3">
+        <div class="card-header">
+            <h2>Schedulo Educator Feedback Form</h2>
+            <p class="card-text"><span><div id="emailHelp" class="form-text small">We are pleased to hear about the event from you. So that we can increase the quality of the upcoming events.</div></span></p>
+        </div>
+        <div class="card-body" id="main">
+              <!-- <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="studentService.selectedStudent._id"> -->
+              <div class="row">
+                <div class="inp fields">
+
+                  <!-- REMOVE THIS -->
+                  <div class="mb-5">
+                    <label for="customRange2" class="form-label">Educator Name</label>
                     <div class="input-group">
-                        <input class="form-control" aria-label="With textarea" placeholder="Tell us about the knowledge you gained (optional)"/>
+                        <input class="form-control" aria-label="With textarea" placeholder="Educator Name" name="educatorname" #educatorname="ngModel"  [(ngModel)]="studentService.selectedStudent.educatorname" required/>
                       </div>
-                </div>
-      
-                <div class="my-5">
-                    <label for="customRange2" class="form-label">Tell us how you feel while meeting with others</label>
+                  </div>
+                  <!-- REMOVE THIS -->
+  
+                  <label for="customRange2" class="form-label">Rate the educator from 1 - 5</label>
+                  <div class="d-flex">
+                      <input type="range" class="form-range" min="1" max="5" id="customRange2" step="1" (change)="getSliderValue($event)" (oninput)="getSliderValue($event)" name="educatorrange" #educatorrange="ngModel" [(ngModel)]="studentService.selectedStudent.educatorque[0].educatorrange" >
+                      <div class="boxAfterRange"><h6 class="box-text" id="box-text"></h6></div>
+                    </div>
+  
+                    <p class="card-text"><span><div id="emailHelp" class="form-text">😶 - Worst  &nbsp;&nbsp;&nbsp;&nbsp; 🙁 - Dislike  &nbsp;&nbsp;&nbsp;&nbsp; 😐 - Netural  &nbsp;&nbsp;&nbsp;&nbsp; 😀 - Liked &nbsp;&nbsp;&nbsp;&nbsp; 😍 - Excellent</div></span></p>
+  
+                  <div class="my-5">
+                      <label for="customRange2" class="form-label">Describe the knowledge level of educator.</label>
+                      <div class="input-group">
+                          <input class="form-control" aria-label="With textarea" placeholder="Tell us about the knowledge level of educator" name="knowledgeofed" #knowledgeofed="ngModel"  [(ngModel)]="studentService.selectedStudent.educatorque[0].knowledgeofed" required/>
+                        </div>
+                  </div>
+  
+        
+                  <div class="my-5">
+                      <label for="customRange2" class="form-label">Tell us how was the educator teaching?</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="teaching" #teaching="ngModel"  [(ngModel)]="studentService.selectedStudent.educatorque[0].teaching" placeholder="Share your experience" required>
+                        </div>
+                  </div>
+        
+                  <div class="my-5">
+                    <label for="customRange2" class="form-label">Describe what things educator can improved in future.</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="lorem" #lorem="ngModel"  [(ngModel)]="studentService.selectedStudent.lorem" placeholder="Share your experience" required>
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="futureimvofed" #futureimvofed="ngModel"  [(ngModel)]="studentService.selectedStudent.educatorque[0].futureimvofed" placeholder="What things can be improved" required>
+                          </div>
                       </div>
+                  </div>
+  
+  
+  
+                  <div class="my-5">
+                    <label for="customRange2" class="form-label">How well organized was the educator teaching?</label>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="organizeded" #organizeded="ngModel"  [(ngModel)]="studentService.selectedStudent.educatorque[0].organizeded" placeholder="Was the educator well organized?" required>
+                          </div>
+                      </div>
+                  </div>
+
+
+                  <div class="my-5">
+                    <label for="customRange2" class="form-label">What more topics should educator add in future?</label>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="futuretopics" #futuretopics="ngModel"  [(ngModel)]="studentService.selectedStudent.educatorque[0].futuretopics" placeholder="What more topics educator can add?" required>
+                          </div>
+                      </div>
+                  </div>
+  
+  
+                  <label for="customRange2" class="form-label">How likely you recommend this educator to others rate from 1 - 5</label>
+                  <div class="d-flex">
+                      <input type="range" class="form-range" min="1" max="5" id="customRange2" step="1" (change)="getSliderValue1($event)" (oninput)="getSliderValue1($event)" name="recommended" #recommended="ngModel" [(ngModel)]="studentService.selectedStudent.educatorque[0].recommended">
+                      <div class="boxAfterRange"><h6 class="box-text" id="box-text1"></h6></div>
+                  </div>
+  
+                  <p class="card-text"><span><div id="emailHelp" class="form-text">😶 - Worst  &nbsp;&nbsp;&nbsp;&nbsp; 🙁 - Dislike  &nbsp;&nbsp;&nbsp;&nbsp; 😐 - Netural  &nbsp;&nbsp;&nbsp;&nbsp; 😀 - Liked &nbsp;&nbsp;&nbsp;&nbsp; 😍 - Excellent</div></span></p>
+                    
+        
                 </div>
-      
-      
               </div>
-            </div>
-            <button type="button" class="btn btn-primary mx-2 my-2" (click)="resetForm(studentForm)">Reset</button>
-            <button type="submit" class="btn btn-primary mx-2 my-2" [disabled]="!studentForm.valid">Submit</button>
-          </form>
+              <p class="card-text my-3"><span><div id="emailHelp" class="form-text small">We'll never share your name, age or any kind of personal details with anyone else.<br>Thank you for attending the event we are thankfull, that you had attended the event.<br></div></span></p>
+              <button type="button" class="btn btn-primary mx-2 my-2" (click)="resetForm(studentForm)">Reset</button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" class="btn btn-primary" data-bs-slide-to="1" aria-label="Slide 2">Next</button>
+  
+        </div>
+    </div>
 
 
-      </div>
+    </div>
+<!-- ACTIVE -------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+<!-- SECOND EVENT --------------------------------------------------------------------------------------------- -->
+    <div class="carousel-item">
+      <img class="d-block w-100" hidden>
+      <div class="card border-primary mb-3">
+        <div class="card-header">
+            <h2>Schedulo Event Feedback Form</h2>
+            <p class="card-text"><span><div id="emailHelp" class="form-text small">We are pleased to hear about the event from you. So that we can increase the quality of the upcoming events.</div></span></p>
+        </div>
+        <div class="card-body" id="main">
+              <!-- <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="studentService.selectedStudent._id"> -->
+              <!-- <input type="hidden" name="educatorName" #educatorName="ngModel" [(ngModel)]="studentService.selectedStudent.educatorname"> -->
+              <!-- <input type="hidden" name="eventName" #eventName="ngModel" [(ngModel)]="studentService.selectedStudent.eventname"> -->
+              <div class="row">
+                <div class="inp fields">
+
+                <!-- REMOVE THIS -->
+                  <div class="mb-5">
+                    <label for="customRange2" class="form-label">Event Name</label>
+                    <div class="input-group">
+                        <input class="form-control" aria-label="With textarea" placeholder="Event Name" name="eventname" #eventname="ngModel"  [(ngModel)]="studentService.selectedStudent.eventname" required/>
+                      </div>
+                  </div>
+                <!-- REMOVE THIS  -->
+  
+                  <label for="customRange2" class="form-label">Rate the event from 1 - 5</label>
+                  <div class="d-flex">
+                      <input type="range" class="form-range" min="1" max="5" id="customRange2" step="1" (change)="getSliderValue2($event)" (oninput)="getSliderValue2($event)" name="eventrange" #eventrange="ngModel" [(ngModel)]="studentService.selectedStudent.eventque[0].eventrange" >
+                      <div class="boxAfterRange"><h6 class="box-text" id="box-text2"></h6></div>
+                    </div>
+  
+                    <p class="card-text"><span><div id="emailHelp" class="form-text">😶 - Worst  &nbsp;&nbsp;&nbsp;&nbsp; 🙁 - Dislike  &nbsp;&nbsp;&nbsp;&nbsp; 😐 - Netural  &nbsp;&nbsp;&nbsp;&nbsp; 😀 - Liked &nbsp;&nbsp;&nbsp;&nbsp; 😍 - Excellent</div></span></p>
+  
+                  <div class="my-5">
+                      <label for="customRange2" class="form-label">Describe the knowledge you have gained from this event.</label>
+                      <div class="input-group">
+                          <input class="form-control" aria-label="With textarea" placeholder="Tell us about the knowledge you gained" name="knowledge" #knowledge="ngModel"  [(ngModel)]="studentService.selectedStudent.eventque[0].knowledge" required/>
+                        </div>
+                  </div>
+  
+        
+                  <div class="my-5">
+                      <label for="customRange2" class="form-label">Tell us how you feel while meeting with others?</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="exp" #exp="ngModel"  [(ngModel)]="studentService.selectedStudent.eventque[0].exp" placeholder="Share your experience" required>
+                        </div>
+                  </div>
+        
+                  <div class="my-5">
+                    <label for="customRange2" class="form-label">Describe what can be improved in future events.</label>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="futureimv" #futureimv="ngModel"  [(ngModel)]="studentService.selectedStudent.eventque[0].futureimv" placeholder="What things can be improved" required>
+                          </div>
+                      </div>
+                  </div>
+  
+  
+  
+                  <div class="my-5">
+                    <label for="customRange2" class="form-label">What diffrent things we can do in future events?</label>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="futurethings" #futurethings="ngModel"  [(ngModel)]="studentService.selectedStudent.eventque[0].futurethings" placeholder="What things can be added in future events" required>
+                          </div>
+                      </div>
+                  </div>
+  
+  
+  
+                  <div class="my-5">
+                    <label for="customRange2" class="form-label">How well organized was the event?</label>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="exampleInputName1" aria-describedby="namehelp" name="organized" #organized="ngModel"  [(ngModel)]="studentService.selectedStudent.eventque[0].organized" placeholder="Was the event well organized?" required>
+                          </div>
+                      </div>
+                  </div>
+  
+  
+  
+                  <label for="customRange2" class="form-label">How likely you recommend this event to others rate from 1 - 5</label>
+                  <div class="d-flex">
+                      <input type="range" class="form-range" min="1" max="5" id="customRange2" step="1" (change)="getSliderValue3($event)" (oninput)="getSliderValue3($event)" name="recommendev" #recommendev="ngModel" [(ngModel)]="studentService.selectedStudent.eventque[0].recommendev">
+                      <div class="boxAfterRange"><h6 class="box-text" id="box-text3"></h6></div>
+                  </div>
+  
+                  <p class="card-text"><span><div id="emailHelp" class="form-text">😶 - Worst  &nbsp;&nbsp;&nbsp;&nbsp; 🙁 - Dislike  &nbsp;&nbsp;&nbsp;&nbsp; 😐 - Netural  &nbsp;&nbsp;&nbsp;&nbsp; 😀 - Liked &nbsp;&nbsp;&nbsp;&nbsp; 😍 - Excellent</div></span></p>
+                    
+        
+                </div>
+              </div>
+              <p class="card-text my-3"><span><div id="emailHelp" class="form-text small">We'll never share your name, age or any kind of personal details with anyone else.<br>Thank you for attending the event we are thankfull, that you had attended the event.<br></div></span></p>
+              <button type="button" class="btn btn-primary mx-2 my-2" (click)="resetForm(studentForm)">Reset</button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="btn btn-primary"  aria-current="true" aria-label="Slide 1">Previous</button>
+              <button type="submit" class="btn btn-primary mx-2 my-2" [disabled]="!studentForm.valid">Submit</button>
+        </div>
+    </div>
+
+
+
+    </div>
+<!-- SECOND --------------------------------------------------------------------------------------------- -->
+
+</form>
+
   </div>
+
 </div>
 
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- SHOWING STUDENTS FEEDBACK -->
+<!-- <div class="container">
+
+  <div class="container">
+    <h2>STUDENTS FEEDBACK</h2>
+</div>
+<div class="container" style="display: flex; flex-wrap: wrap;">
+  <div class="card border-primary my-2 mx-2" style="width: 18rem;" *ngFor="let student of studentService.students">
+    <hr>
+    <h5 class="text-center">{{student.educatorName}}</h5>
+    <hr>
+    <div class="card-body" *ngFor="let questions of student.eventque">
+      <p class="card-text text-center">{{ questions.knowledge }}</p>
+      <p class="card-text text-center">{{ questions.exp }}</p>
+      <hr>
+    </div>
+  </div>
+</div>
+</div> -->
 
 
 
@@ -130,64 +327,28 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <!-- <th>Name</th>
-                <th>Age</th>
-                <th>Class</th> -->
+                <th>Educator Name</th>
+                <th>Event Name</th>
                 <th>About this Course or event, from other students</th>
-                <th>Educator Rating</th>
+                <th>Event Rating</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let student of studentService.students">
-                <!-- <td>{{student.name}}</td>
-                <td>{{student.age}}</td>
-                <td>{{student.class}}</td> -->
-                <td>{{student.lorem}}</td>
-                <td>{{student.range}}</td>
-                <!-- <td>
-                  <button class="btn btn-primary" (click)="onEdit(student)">Edit</button>
-                  <button class="btn btn-danger mx-2" (click)="onDelete(student._id)">Delete</button>
+              <tbody *ngFor="let student of studentService.students">
 
-                </td> -->
-              </tr>
-            </tbody>
+                  <tr *ngFor="let questions of student.eventque">
+                    <td>{{student.educatorname}}</td>
+                    <td>{{student.eventname}}</td>
+                    <td>{{questions.knowledge}}</td>
+                    <td>{{questions.eventrange}}</td>
+                  </tr>
+
+              </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
