@@ -1,0 +1,46 @@
+<div class="container" style="width: 60%;">
+    <div class="my-5">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+            <h2>LOGIN</h2>
+            <div class="card-body" id="main">
+              <div class="row">
+                <div class="inp fields">
+
+                <!-- ADD THIS -->
+                  <div class="mb-5">
+                    <label for="customRange2" class="form-label">Email</label>
+                    <div class="input-group">
+                        <input class="form-control" aria-label="With textarea" placeholder="Email@mail.com" name="email" #email="ngModel"  [(ngModel)]="studentService.logins.email" required/>
+                      </div>
+                  </div>
+                <!-- Add THIS  -->
+
+                <!-- ADD THIS -->
+                <div class="mb-5">
+                    <label for="customRange2" class="form-label">Password</label>
+                    <div class="input-group">
+                        <input class="form-control" aria-label="With textarea" placeholder="Password" name="password" #password="ngModel"  [(ngModel)]="studentService.logins.password" required/>
+                      </div>
+                  </div>
+                <!-- Add THIS  -->
+
+
+                 <!-- ADD THIS -->
+                 <!-- <div class="mb-5">
+                  <label for="customRange2" class="form-label">Role</label>
+                  <div class="input-group">
+                      <input class="form-control" aria-label="With textarea" placeholder="Role" name="role" #role="ngModel"  [(ngModel)]="studentService.logins.role"/>
+                    </div>
+                  </div> -->
+                  <!-- Add THIS  -->
+  
+                
+                </div>
+              </div>
+              <p class="card-text my-3"><span><div id="emailHelp" class="form-text small">We'll never share your name, age or any kind of personal details with anyone else.<br>Thank you for attending the event we are thankfull, that you had attended the event.<br></div></span></p>
+                <button type="submit" class="btn btn-primary" (click)="resetForm(loginForm)">Reset</button>
+              <button type="submit" class="btn btn-primary mx-2 my-2" [disabled]="!loginForm.valid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

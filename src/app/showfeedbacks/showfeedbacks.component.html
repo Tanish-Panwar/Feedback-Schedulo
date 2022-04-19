@@ -1,1 +1,37 @@
-<p>showfeedbacks works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Student's Feedback</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Experience gained by students</th>
+                <th>Event Rating</th>
+                <th>How students feel while meeting with others</th>
+                <th>Was the event organized according to students</th>
+                <th>Improvements needed according to students</th>
+              </tr>
+            </thead>
+              <tbody *ngFor="let student of studentService.students">
+
+                <tr>
+                  <tr *ngFor="let questions of student.eventque">
+                    <td style="width: 150px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.knowledge}}">{{questions.knowledge.slice(0, 30)}}...</td>
+                    <td style="width: 100px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.eventrange}}">{{questions.eventrange.slice(0, 30)}}</td>
+                    <td style="width: 150px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.exp}}">{{questions.exp.slice(0, 30)}}...</td>
+                    <td style="width: 100px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.organized}}">{{questions.organized.slice(0, 30)}}...</td>
+                    <td style="width: 100px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.futurethings}}">{{questions.futurethings.slice(0, 30)}}...</td>
+
+                  </tr>
+
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

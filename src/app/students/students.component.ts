@@ -10,8 +10,8 @@ import { StudentService } from '../shared/student.service';
   providers: [StudentService]
 })
 export class StudentsComponent implements OnInit {
-  educatorName: "Pablo";
-  eventName: "AdvanceDSA"
+  // educatorName: "Pablo";
+  // eventName: "AdvanceDSA"
 
   constructor(public studentService: StudentService) {}
 
@@ -48,8 +48,8 @@ export class StudentsComponent implements OnInit {
     this.studentService.selectedStudent = {
       educatorname: '',
       eventname: '',
-      eventque: [ {eventrange: '', knowledge: '', exp: '', futureimv: '', futurethings: '', organized: '', recommendev: ''}],
-      educatorque: [{educatorrange: '', knowledgeofed: '', teaching: '', futureimvofed: '', organizeded: '', futuretopics: '', recommended: ''}]
+      eventque: [ {eventrange: '1', knowledge: '', exp: '', futureimv: '', futurethings: '', organized: '', recommendev: '1'}],
+      educatorque: [{educatorrange: '1', knowledgeofed: '', teaching: '', futureimvofed: '', organizeded: '', futuretopics: '', recommended: '1'}]
     }
   }
 
@@ -69,6 +69,11 @@ export class StudentsComponent implements OnInit {
     });
   }
 
+
+  onLogout() {
+    localStorage.removeItem('login');
+    window.location.href = '/';
+  }
 
 
 }

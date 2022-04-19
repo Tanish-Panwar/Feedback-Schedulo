@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/toPromise';
 
-import { Student } from './student.model';
+import { Student, Login } from './student.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +10,15 @@ import { Student } from './student.model';
 export class StudentService {
   selectedStudent: Student;
   students: Student[];
-  readonly baseURL = 'http://localhost:3000/sample';
+  logins: Login;
+  readonly baseURL = 'http://localhost:3000/api/sample';
+  readonly loginURL = 'http://localhost:3000/api/login/log';
   
   constructor(private http: HttpClient) { }
+
+  loginStudent(login: Login){
+    return this.http.post(this.loginURL, login);
+  }
 
   postStudent(student: Student){
     return this.http.post(this.baseURL, student);

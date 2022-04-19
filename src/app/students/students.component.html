@@ -15,16 +15,11 @@
           <a class="nav-link" href="#">Link</a>
         </li>
       </ul>
-      <a class="btn btn-outline-success" type="submit">Show Feedbacks</a>
+      <a class="btn btn-outline-success" type="submit" routerLink="/show-feedbacks" routerLinkActive="active">Show Feedbacks</a>
+      <button class="btn btn-outline-success mx-2" type="submit" routerLinkActive="active" (click)="onLogout()" >Logout</button>
     </div>
   </div>
 </nav>
-
-
-
-
-
-
 
 
 
@@ -133,7 +128,6 @@
               <p class="card-text my-3"><span><div id="emailHelp" class="form-text small">We'll never share your name, age or any kind of personal details with anyone else.<br>Thank you for attending the event we are thankfull, that you had attended the event.<br></div></span></p>
               <button type="button" class="btn btn-primary mx-2 my-2" (click)="resetForm(studentForm)">Reset</button>
               <button type="button" data-bs-target="#carouselExampleIndicators" class="btn btn-primary" data-bs-slide-to="1" aria-label="Slide 2">Next</button>
-  
         </div>
     </div>
 
@@ -316,7 +310,7 @@
 
 
 <!-- Showing students feedback -->
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -348,7 +342,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
