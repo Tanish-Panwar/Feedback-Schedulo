@@ -17,22 +17,30 @@ export class LoginComponent implements OnInit {
   }
 
 
+  // Reset function
   resetForm(form?: NgForm){
     if(form)
       form.reset();
     this.studentService.logins = {
       email: '',
       password: '',
-      role: ''
+      role: '',
+      name: '',
+      event: ''
     }
   }
 
 
+  // Login function
   onSubmit(form: NgForm){
     this.studentService.loginStudent(form.value).subscribe((res) => {
       if(res){
         window.location.href = "/send-feedbacks";
-        localStorage.setItem('login', JSON.stringify(res));
+        // Storing the user's data in local storage just for testing, and getting the user's data from the database
+        localStorage.setItem('email', res[0].email);
+        localStorage.setItem('role', res[0].role);
+        localStorage.setItem('name', res[0].name);
+        localStorage.setItem('event', res[0].event);
       }
       else {
         window.location.href = "/";

@@ -2,7 +2,10 @@ export class Login {
     email: string;
     password: string;
     role: string;
+    name: string;
+    event: string;
 }
+
 
 export class Student {
     educatorname: string;

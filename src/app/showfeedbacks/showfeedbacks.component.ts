@@ -9,54 +9,53 @@ import { StudentService } from '../shared/student.service';
   providers: [StudentService]
 })
 export class ShowfeedbacksComponent implements OnInit {
-
   constructor(public studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.getStudents();
-  }
-
-  // A function to show feedbacks only for the logged in student
-  showFeedbacks(login: Login){
-    if(login.email == localStorage.getItem('email')){
-      return true;
+    // Checking if role is admin or educator. else it will be a user.
+    if(localStorage.getItem('role') == "Admin"){
+      this.getStudents();
+      console.log("All");
+    }
+    if(localStorage.getItem('role') == "Educator"){
+      this.getStudentsByEducatorName();
+      console.log(localStorage.getItem('name'));
+      console.log("By Educator Name");
     }
     else {
-      return false;
+      this.getStudentsByEvent();
+      console.log("By Student Event Attended");
+      console.log(localStorage.getItem('event'));
     }
   }
 
 
+
+  // For Admin
   getStudents(){
-    if(this.showFeedbacks(JSON.parse(localStorage.getItem('login')))){
-      this.studentService.getStudents().subscribe((res) => {
-        this.studentService.students = res as Student[];
-      });
-    }
-    // else{
-    //   window.location.href = '/';
-    // }
+    this.studentService.getStudents().subscribe((res) => {
+      this.studentService.students = res as Student[];
+    });
 
   }
+
+
+  // For Users
+  getStudentsByEvent(){
+    this.studentService.getStudentsByEvent().subscribe((res) => {
+      this.studentService.students = res as Student[];
+    });
+  }
+
+
+  // For Educators.
+  getStudentsByEducatorName(){
+    this.studentService.getStudentsByEducatorName().subscribe((res) => {
+      this.studentService.students = res as Student[];
+    });
+  }
+
+
 
 
 }
-
-
-
-
-// Role based = AdminBase, educatorBase, user(EventBase)
-
-// Pseudo Code:
-
-// Admin:
-// if Local storage.login.getitem("Role") === Admin:
-// showALl
-
-// Educator:
-// if Local Local storage.login.getitem("Role") === Educator:
-// Search for educator name show Feedbacks.
-
-// User: 
-// if Local storage.login.getitem("Role") === null || "":
-// Search for event show feedbacks related to event.

@@ -13,6 +13,8 @@ export class StudentService {
   logins: Login;
   readonly baseURL = 'http://localhost:3000/api/sample';
   readonly loginURL = 'http://localhost:3000/api/login/log';
+  readonly getStudentsByEventURL = 'http://localhost:3000/api/login/feed';
+  readonly getStudentsByEducatorNameURL = 'http://localhost:3000/api/login/feedevent';
   
   constructor(private http: HttpClient) { }
 
@@ -27,5 +29,13 @@ export class StudentService {
   getStudents(){
     return this.http.get(this.baseURL);
   }
-  
+
+  getStudentsByEvent(){
+    return this.http.post(this.getStudentsByEventURL, {event: localStorage.getItem('event')});
+  }
+
+  getStudentsByEducatorName(){
+    return this.http.post(this.getStudentsByEducatorNameURL, {name: localStorage.getItem('name')});
+  }
+
 }
