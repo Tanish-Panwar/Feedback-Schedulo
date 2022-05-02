@@ -1,0 +1,40 @@
+.glass{
+    background: rgba(255, 255, 255, 0.377);
+    outline: none;
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 5px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    position:static;
+    z-index: 0;
+    bottom:0px;
+  }
+  
+  
+
+.circle-top{
+    border: 0px solid #0dcaf0;
+    width: 300px;
+    height: 300px;
+    border-radius: 300px;
+    background-image: linear-gradient(to right, #0dcaf0, #caed2d);
+    display: flex;
+    position: fixed;
+    left: -10px;
+    top: -10px;
+    z-index: -1;
+}
+
+.circle-bottom{
+    border: 0px solid #0dcaf0;
+    width: 300px;
+    height: 300px;
+    border-radius: 300px;
+    background-image: linear-gradient(to right, #0dcaf0, #caed2d);
+    display: flex;
+    position: fixed;
+    right: 0px;
+    bottom: -10px;
+    z-index: -1;
+
+}

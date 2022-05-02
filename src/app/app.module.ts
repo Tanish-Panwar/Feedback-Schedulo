@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
+  // Declaring all the components and modules.
   declarations: [
     AppComponent,
     routingComponents,
     LoginComponent
   ],
+  // Declaring all the modules.
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +22,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule
   ],
   providers: [],
+  // Using Bootstrap.
   bootstrap: [AppComponent]
 })
 export class AppModule { }

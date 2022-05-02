@@ -1,3 +1,4 @@
+// Change this according to the database of company.
 export class Login {
     email: string;
     password: string;
@@ -7,6 +8,7 @@ export class Login {
 }
 
 
+// Change thses Questions according to the requirements of the database.
 export class Student {
     educatorname: string;
     eventname: string;

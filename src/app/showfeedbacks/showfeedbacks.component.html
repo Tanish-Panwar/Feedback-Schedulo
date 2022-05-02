@@ -1,40 +1,175 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Student's Feedback</h3>
-        </div>
-        <div class="card-body">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Experience gained by students</th>
-                <th>Event Rating</th>
-                <th>How students feel while meeting with others</th>
-                <th>Was the event organized according to students</th>
-                <th>Improvements needed according to students</th>
-              </tr>
-            </thead>
-              <tbody *ngFor="let student of studentService.students">
+<!-- NAV BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/send-feedbacks">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/send-feedbacks">Home</a>
+        </li>
+      </ul>
 
-                <tr>
-                  <tr *ngFor="let questions of student.eventque">
-                    <td style="width: 150px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.knowledge}}">{{questions.knowledge.slice(0, 30)}}...</td>
-                    <td style="width: 100px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.eventrange}}">{{questions.eventrange.slice(0, 30)}}</td>
-                    <td style="width: 150px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.exp}}">{{questions.exp.slice(0, 30)}}...</td>
-                    <td style="width: 100px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.organized}}">{{questions.organized.slice(0, 30)}}...</td>
-                    <td style="width: 100px; height: 50px;" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.futurethings}}">{{questions.futurethings.slice(0, 30)}}...</td>
-
-                  </tr>
-
-              </tbody>
-          </table>
+      <!-- FOR SHOWING EDUCATORS NAME -->
+      <button class="btn btn-outline-info mx-2" [hidden]="isEducator()" (click)="getStudents()">Show All</button>
+      <div class="dropdown">
+        <button [hidden]="isEducator()" class="btn btn-outline-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Select Educator
+        </button>
+      
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul *ngFor="let student of studentService.educatornameset">
+            <li class="dropdown-item" (click)="getFeedbacksByEducatorName(student)" >{{student}}</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
+</nav>
+<!-- NAV BAR -->
+
+
+
+
+<!-- CIRCLES -->
+<div class="circle-top">
+
 </div>
 
+<div class="circle-bottom">
+  
+</div>
+<!-- CIRCLES -->
 
 
+
+
+
+<!-- SHOW FEEDBACKS -->
+<div class="container">
+  <div class="my-5">  
+  <div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel" data-bs-interval="false">
+    <div class="carousel-inner">
+
+  <!-- ACTIVE -------------------------------------------------------------------------------------------- -->
+      <div class="carousel-item active">
+        <img class="d-block w-100" hidden>
+
+        <!-- EVENT FEEDBACKS ACTIVE -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card border-info glass">
+                <div class="card-header border-info">
+                  <h3 class="card-title font-monospace" >Student's Feedback For Event</h3>
+                </div>
+                <div class="card-body overflow-scroll">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="font-monospace" style="width: 50px; height: 20px;">Sr. No.</th>
+                        <th class="font-monospace" style="width: 400px; height: 20px;">Experience gained by students</th>
+                        <th class="font-monospace" style="width: 50px; height: 20px;">Event Rating</th>
+                        <th class="font-monospace" style="width: 400px; height: 20px;">How students feel while meeting with others</th>
+                        <th class="font-monospace" style="width: 150px; height: 20px;">Was the event organized.</th>
+                        <th class="font-monospace" style="width: 200px; height: 20px;">Things can be added in future.</th>
+                        <th class="font-monospace" style="width: 200px; height: 20px;">Improvements needed.</th>
+                        <th class="font-monospace" style="width: 50px; height: 20px;">Reccomendation rating of Event.</th>
+                      </tr>
+                    </thead>
+                      <tbody *ngFor="let student of studentService.students; index as i">
+        
+                        <tr>
+                          <tr *ngFor="let questions of student.eventque">
+                            <td scope="row">{{i}}.</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.knowledge}}">{{questions.knowledge.slice(0, 20)}}...</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.eventrange}}">{{questions.eventrange.slice(0, 20)}}</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.exp}}">{{questions.exp.slice(0, 20)}}...</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.organized}}">{{questions.organized.slice(0, 20)}}...</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.futurethings}}">{{questions.futurethings.slice(0, 20)}}...</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.futureimv}}">{{questions.futureimv.slice(0, 20)}}...</td>
+                            <td class="text-muted" type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{questions.recommendev}}">{{questions.recommendev.slice(0, 20)}}</td>
+                          </tr>
+        
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- EVENT FEEDBACK ACTIVE -->
+
+        <button type="button" data-bs-target="#carouselExampleIndicators" class="btn btn-outline-warning my-2 mx-2" data-bs-slide-to="1" aria-label="Slide 2">Educator's Questions</button>
+        
+
+      </div>
+  <!-- ACTIVE -------------------------------------------------------------------------------------------- -->
+  
+  
+  <!-- SECOND Educator --------------------------------------------------------------------------------------------- -->
+      <div class="carousel-item">
+        <img class="d-block w-100" hidden>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card border-warning glass">
+                <div class="card-header border-warning">
+                  <h3 class="card-title font-monospace">Student's Feedback For Educator</h3>
+                </div>
+                <div class="card-body overflow-scroll">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="font-monospace" style="width: 50px; height: 20px;">Sr. No.</th>
+                        <th class="font-monospace" style="width: 400px;  height: 20px;" >Knowledge of educator</th>
+                        <th class="font-monospace" style="width: 50px;  height: 20px;" >Educator Rating</th>
+                        <th class="font-monospace" style="width: 400px;  height: 20px;" >Teaching style of educator</th>
+                        <th class="font-monospace" style="width: 300px;  height: 20px;" >Teaching in Organized way</th>
+                        <th class="font-monospace" style="width: 200px;  height: 20px;" >Topics can be added in future</th>
+                        <th class="font-monospace" style="width: 200px;  height: 20px;" >Improvements needed in educator</th>
+                        <th class="font-monospace" style="width: 50px;  height: 20px;" >Reccomendation rating of Educator</th>
+                      </tr>
+                    </thead>
+                      <tbody *ngFor="let student of studentService.students; index as i">
+                        
+                        <tr>
+                          <tr *ngFor="let questionsofEd of student.educatorque">
+                            <td> {{i}}. </td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.knowledgeofed}}">{{questionsofEd.knowledgeofed.slice(0, 20)}}...</td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.educatorrange}}">{{questionsofEd.educatorrange.slice(0, 20)}}</td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.teaching}}">{{questionsofEd.teaching.slice(0, 20)}}...</td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.organizeded}}">{{questionsofEd.organizeded.slice(0, 20)}}...</td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.futuretopics}}">{{questionsofEd.futuretopics.slice(0, 20)}}...</td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.futureimvofed}}">{{questionsofEd.futureimvofed.slice(0, 20)}}...</td>
+                            <td type="text" class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="{{questionsofEd.recommended}}">{{questionsofEd.recommended.slice(0, 20)}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="btn btn-outline-info my-2 mx-2"  aria-current="true" aria-label="Slide 1">Event Questions</button>
+
+      </div>
+  <!-- SECOND EDUCATOR --------------------------------------------------------------------------------------------- -->
+  
+    </div>
+  
+  </div>
+  
+  
+  
+  </div>
+  
+  
+  
+</div>
+
+<!-- SHOW FEEDBACKS -->

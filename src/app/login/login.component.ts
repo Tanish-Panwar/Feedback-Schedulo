@@ -12,9 +12,22 @@ export class LoginComponent implements OnInit {
 
   constructor(public studentService: StudentService) { }
 
+  // Calling the checkLogin function and resetForm function
   ngOnInit(): void {
     this.resetForm();
+    this.checkLogin();
   }
+
+
+  // Check if the user is logged in
+  checkLogin(){
+    if(localStorage.getItem('email')){
+      window.location.href = '/send-feedbacks';
+    }
+  }
+
+
+
 
 
   // Reset function

@@ -1,0 +1,42 @@
+.glass{
+    background: rgba(255, 255, 255, 0.377);
+    outline: none;
+    box-shadow: 0 8px 32px 0 rgba(3, 3, 5, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 5px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    position:static;
+    z-index: 0;
+    bottom:0px;
+  }
+  
+
+
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent;
+    border-bottom: 300px solid #0dcaf0;
+    background-image: linear-gradient(to right, #0dcaf0, #caed2d);
+    display: flex;
+    position: fixed;
+    left: -10px;
+    top: -10px;
+    z-index: -1;
+  }
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-top: 300px solid #caed2d;
+  background-image: linear-gradient(to right, #0dcaf0, #caed2d);
+  display: flex;
+  position: fixed;
+  right: 0px;
+  bottom: -10px;
+  z-index: -1;
+}

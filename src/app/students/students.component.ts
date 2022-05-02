@@ -15,11 +15,13 @@ export class StudentsComponent implements OnInit {
 
   constructor(public studentService: StudentService) {}
 
+  // Calling functions when our entry point hits.
   ngOnInit(): void {
     this.resetForm();
     this.getStudents();
   }
   
+  // Range functions for the slider.
   arr = ['😶', '😐', '🙂', '😀', '😍'];
   getSliderValue(event: any){
     var text = document.querySelector('#box-text');
@@ -42,6 +44,9 @@ export class StudentsComponent implements OnInit {
   }
 
 
+
+
+  // RESET FORM BUTTON FUNCTION.
   resetForm(form?: NgForm){
     if(form)
       form.reset();
@@ -54,6 +59,7 @@ export class StudentsComponent implements OnInit {
   }
 
 
+  // Add Student Feedback Button Function. Linked with submit in students.component.html.
   onSubmit(form: NgForm){
     this.studentService.postStudent(form.value).subscribe((res) => {
       this.resetForm(form);
@@ -63,15 +69,38 @@ export class StudentsComponent implements OnInit {
     
   }
 
+  // Getting students when onSumbit is called.
   getStudents(){
     this.studentService.getStudents().subscribe((res) => {
       this.studentService.students = res as Student[];
     });
   }
 
+  // Hide button if the logged in user is a student
+  isStudent() {
+    if(localStorage.getItem('role') == '') {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
+  // Enable Submit button for form if the logged in user is a student. 
+  isOnlyStudent() {
+    if(localStorage.getItem('role') == ''){
+      return false;
+    }
+    else return true;
+  }
+
+
+  // Removing items from local storage.
   onLogout() {
-    localStorage.removeItem('login');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+    localStorage.removeItem('name');
+    localStorage.removeItem('event');
     window.location.href = '/';
   }
 
